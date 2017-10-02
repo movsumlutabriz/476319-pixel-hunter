@@ -1,6 +1,6 @@
 # Личный проект «Пиксель хантер» [![Build status][travis-image]][travis-url]
 
-* Студент: [Tabriz  Movsumlu](https://up.htmlacademy.ru/adaptive/12/user/476319).
+* Студент: [Tabriz  Movsumlu](https://htmlacademy.ru/profile/id476319).
 * Наставник: [Саша Ивашкин](https://htmlacademy.ru/profile/id7280).
 
 ---
