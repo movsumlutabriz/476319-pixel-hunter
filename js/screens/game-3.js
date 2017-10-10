@@ -1,6 +1,6 @@
-import screenStats from "./screen-stats";
-import {show as showScreen} from "./screen";
-import {elemFromTemplate} from "./elem";
+import {elemFromTemplate} from "../elem";
+import {show as showScreen} from "../screen";
+import screenStats from "./stats";
 
 const html = `<div>
   <header class="header">

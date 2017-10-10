@@ -1,6 +1,6 @@
-import {elemFromTemplate} from "./elem";
-import {show as showScreen} from "./screen";
-import screenGreeting from "./screen-greeting";
+import {elemFromTemplate} from "../elem";
+import {show as showScreen} from "../screen";
+import screenGreeting from "./greeting";
 
 const html = `<div id="intro" class="intro">
   <h1 class="intro__asterisk">*</h1>

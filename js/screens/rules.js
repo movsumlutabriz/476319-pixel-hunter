@@ -1,6 +1,6 @@
-import {elemFromTemplate} from "./elem";
-import {show as showScreen} from "./screen";
-import screenGame1 from "./screen-game-1";
+import {elemFromTemplate} from "../elem";
+import {show as showScreen} from "../screen";
+import screenGame1 from "./game-1";
 
 const html = `<div>
   <header class="header">

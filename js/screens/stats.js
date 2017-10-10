@@ -1,4 +1,4 @@
-import {elemFromTemplate} from "./elem";
+import {elemFromTemplate} from "../elem";
 
 const html = `<div>
   <header class="header">
