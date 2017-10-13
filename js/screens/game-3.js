@@ -1,5 +1,6 @@
-import {elemFromTemplate} from "../elem";
-import {show as showScreen} from "../screen";
+import getElemFromTemplate from "../elem";
+import reload from "../reload";
+import show from "../show";
 import screenStats from "./stats";
 
 const html = `<div>
@@ -47,11 +48,13 @@ const html = `<div>
   </div>
 </div>`;
 
-const elem = elemFromTemplate(html);
+const elem = getElemFromTemplate(html);
+
+elem.querySelector(`.header__back`).addEventListener(`click`, () => reload());
 
 elem.addEventListener(`click`, (e) => {
   if (e.target.classList.contains(`game__option`)) {
-    showScreen(screenStats);
+    show(screenStats);
   }
 });
 

@@ -1,6 +1,8 @@
-import {elemFromTemplate} from "../elem";
-import {show as showScreen} from "../screen";
+import getElemFromTemplate from "../elem";
+import reload from "../reload";
+import show from "../show";
 import screenGame2 from "./game-2";
+
 
 const html = `<div>
   <header class="header">
@@ -60,12 +62,14 @@ const html = `<div>
   </div>
 </div>`;
 
-const elem = elemFromTemplate(html);
+const elem = getElemFromTemplate(html);
 const form = elem.querySelector(`form.game__content`);
+
+elem.querySelector(`.header__back`).addEventListener(`click`, () => reload());
 
 form.addEventListener(`change`, () => {
   if (form.question1.value && form.question2.value) {
-    showScreen(screenGame2);
+    show(screenGame2);
   }
 });
 

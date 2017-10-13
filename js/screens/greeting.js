@@ -1,5 +1,5 @@
-import {show as showScreen} from "../screen";
-import {elemFromTemplate} from "../elem";
+import show from "../show";
+import getElemFromTemplate from "../elem";
 import screenRules from "./rules";
 
 const html = `<div class="greeting central--blur">
@@ -16,16 +16,8 @@ const html = `<div class="greeting central--blur">
   <div class="greeting__continue"><span><img src="img/arrow_right.svg" width="64" height="64" alt="Next"></span></div>
 </div>`;
 
-const elem = elemFromTemplate(html);
+const elem = getElemFromTemplate(html);
 
-elem.querySelector(`.greeting__continue`).addEventListener(`click`, () => showScreen(screenRules));
-
-document.addEventListener(`click`, (e) => {
-  if (e.target.classList.contains(`back`)) {
-    showScreen(elem);
-  } else if (e.target.parentNode && e.target.parentNode.classList.contains(`back`)) {
-    showScreen(elem);
-  }
-});
+elem.querySelector(`.greeting__continue`).addEventListener(`click`, () => show(screenRules));
 
 export default elem;

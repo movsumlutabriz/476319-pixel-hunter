@@ -1,5 +1,5 @@
-import {elemFromTemplate} from "../elem";
-import {show as showScreen} from "../screen";
+import getElemFromTemplate from "../elem";
+import show from "../show";
 import screenGreeting from "./greeting";
 
 const html = `<div id="intro" class="intro">
@@ -8,8 +8,8 @@ const html = `<div id="intro" class="intro">
 </div>`;
 
 
-const elem = elemFromTemplate(html);
+const elem = getElemFromTemplate(html);
 
-elem.querySelector(`.intro__asterisk`).addEventListener(`click`, () => showScreen(screenGreeting));
+elem.querySelector(`.intro__asterisk`).addEventListener(`click`, () => show(screenGreeting));
 
 export default elem;
