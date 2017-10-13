@@ -1,4 +1,5 @@
-import {elemFromTemplate} from "../elem";
+import getElemFromTemplate from "../elem";
+import reload from "../reload";
 
 const html = `<div>
   <header class="header">
@@ -111,4 +112,8 @@ const html = `<div>
   </div>
 </div>`;
 
-export default elemFromTemplate(html);
+const elem = getElemFromTemplate(html);
+
+elem.querySelector(`.header__back`).addEventListener(`click`, () => reload());
+
+export default elem;

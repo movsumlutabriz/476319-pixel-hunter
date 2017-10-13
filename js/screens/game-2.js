@@ -1,5 +1,6 @@
-import {elemFromTemplate} from "../elem";
-import {show as showScreen} from "../screen";
+import getElemFromTemplate from "../elem";
+import reload from "../reload";
+import show from "../show";
 import screenGame3 from "./game-3";
 
 const html = `<div>
@@ -49,8 +50,10 @@ const html = `<div>
   </div>
 </div>`;
 
-const elem = elemFromTemplate(html);
+const elem = getElemFromTemplate(html);
 
-elem.addEventListener(`change`, () => showScreen(screenGame3));
+elem.querySelector(`.header__back`).addEventListener(`click`, () => reload());
+
+elem.addEventListener(`change`, () => show(screenGame3));
 
 export default elem;

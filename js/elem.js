@@ -1,4 +1,4 @@
-export const elemFromTemplate = (template) => {
+export default (template) => {
   const elem = document.createElement(`div`);
   elem.innerHTML = template;
   return elem.firstElementChild;

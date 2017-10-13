@@ -1,5 +1,6 @@
-import {elemFromTemplate} from "../elem";
-import {show as showScreen} from "../screen";
+import getElemFromTemplate from "../elem";
+import reload from "../reload";
+import show from "../show";
 import screenGame1 from "./game-1";
 
 const html = `<div>
@@ -29,8 +30,10 @@ const html = `<div>
   </div>
 </div>`;
 
-const elem = elemFromTemplate(html);
+const elem = getElemFromTemplate(html);
 const elemSubmit = elem.querySelector(`.rules__button`);
+
+elem.querySelector(`.header__back`).addEventListener(`click`, () => reload());
 
 elem.querySelector(`.rules__input`).addEventListener(`input`, (e) => {
   elemSubmit.disabled = !e.target.value;
@@ -38,7 +41,7 @@ elem.querySelector(`.rules__input`).addEventListener(`input`, (e) => {
 
 elem.querySelector(`.rules__form`).addEventListener(`submit`, (e) => {
   e.preventDefault();
-  showScreen(screenGame1);
+  show(screenGame1);
 });
 
 export default elem;

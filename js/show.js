@@ -1,6 +1,6 @@
 const elemScreen = document.getElementById(`main`);
 
-export const show = (elem) => {
+export default (elem) => {
   elemScreen.innerHTML = ``;
   elemScreen.appendChild(elem);
 };
