@@ -1,4 +1,4 @@
-import {show as showScreen} from "./screen";
+import show from "./show";
 import screenIntro from "./screens/intro";
 
-showScreen(screenIntro);
+show(screenIntro);
