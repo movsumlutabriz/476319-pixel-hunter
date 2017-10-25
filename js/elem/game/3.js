@@ -1,9 +1,9 @@
-import getElemFromTemplate from "../elem";
-import reload from "../reload";
-import showNextQuestion from "../next-question";
-import getHtmlGame3 from "./html-game-3";
+import getElemFromTemplate from "../../elem";
+import reload from "../../reload";
+import showNextQuestion from "../../next-question";
+import getHtmlGame3 from "../../html/game/3";
 
-const getElemGame2 = (question) => {
+const getElemGame3 = (question) => {
   const html = getHtmlGame3(question);
   const elem = getElemFromTemplate(html);
   elem.querySelectorAll(`.game__option > img`).forEach((img) => {
@@ -13,7 +13,7 @@ const getElemGame2 = (question) => {
 
   elem.querySelector(`.header__back`).addEventListener(`click`, () => reload());
 
-  elem.addEventListener(`click`, (e) => {
+  elem.addEventListener(`mouseup`, (e) => {
     if (e.target.classList.contains(`game__option`)) {
       question.answer = e.target.dataset.type;
       showNextQuestion();
@@ -23,4 +23,4 @@ const getElemGame2 = (question) => {
   return elem;
 };
 
-export default getElemGame2;
+export default getElemGame3;

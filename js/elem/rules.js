@@ -1,6 +1,6 @@
 import getElemFromTemplate from "../elem";
 import reload from "../reload";
-import getHtmlHeader from "./html-header";
+import getHtmlHeader from "../html/header";
 import showNextQuestion from "../next-question";
 
 const html = `<div>

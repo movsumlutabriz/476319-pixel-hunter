@@ -1,6 +1,6 @@
 import getElemFromTemplate from "../elem";
 import reload from "../reload";
-import getHtmlStats from "./html-stats";
+import getHtmlStats from "../html/stats";
 
 export default () => {
   const elem = getElemFromTemplate(getHtmlStats());

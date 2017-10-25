@@ -1,5 +1,5 @@
-import getHtmlHeader from "./html-header";
-import getHtmlGameStats from "./html-game-stats";
+import getHtmlHeader from "./header";
+import getHtmlGameStats from "./game/stats";
 import dataGame from "../data/game";
 
 export default () => {

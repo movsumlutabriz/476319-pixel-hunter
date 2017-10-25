@@ -1,6 +1,6 @@
 import show from "../show";
 import getElemFromTemplate from "../elem";
-import elemRules from "./elem-rules";
+import elemRules from "./rules";
 
 const html = `<div class="greeting central--blur">
   <div class="greeting__logo"><img src="img/logo_big.png" width="201" height="89" alt="Pixel Hunter"></div>

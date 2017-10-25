@@ -1,5 +1,5 @@
-import getLives from "./html-lives";
-import getHtmlBack from "./html-back";
+import getLives from "./lives";
+import getHtmlBack from "./back";
 
 export default () => `
   <header class="header">

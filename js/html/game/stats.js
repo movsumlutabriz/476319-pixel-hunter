@@ -1,4 +1,4 @@
-import dataGame from "../data/game";
+import dataGame from "../../data/game";
 
 export default () => {
   let html = `<div class="stats"><ul class="stats">`;

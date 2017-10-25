@@ -1,4 +1,4 @@
-import elemGreeting from "./screens/elem-greeting";
+import elemGreeting from "./elem/greeting";
 import show from "./show";
 import dataGame from "./data/game";
 

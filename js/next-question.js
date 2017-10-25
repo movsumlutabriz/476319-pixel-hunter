@@ -1,8 +1,8 @@
 import show from "./show";
-import getElemGame1 from "./screens/elem-game-1";
-import getElemGame2 from "./screens/elem-game-2";
-import getElemGame3 from "./screens/elem-game-3";
-import getElemStats from "./screens/elem-stats";
+import getElemGame1 from "./elem/game/1";
+import getElemGame2 from "./elem/game/2";
+import getElemGame3 from "./elem/game/3";
+import getElemStats from "./elem/stats";
 import dataGame from "./data/game";
 
 const questions = dataGame.questions;

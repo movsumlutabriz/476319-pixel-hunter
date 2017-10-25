@@ -1,4 +1,4 @@
 import show from "./show";
-import elemIntro from "./screens/elem-intro";
+import elemIntro from "./elem/intro";
 
 show(elemIntro);

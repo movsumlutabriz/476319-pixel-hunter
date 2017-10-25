@@ -1,7 +1,7 @@
-import getElemFromTemplate from "../elem";
-import reload from "../reload";
-import getHtmlGame1 from "./html-game-1";
-import showNextQuestion from "../next-question";
+import getElemFromTemplate from "../../elem";
+import reload from "../../reload";
+import getHtmlGame1 from "../../html/game/1";
+import showNextQuestion from "../../next-question";
 
 const getElemGame1 = (question) => {
   const html = getHtmlGame1(question);

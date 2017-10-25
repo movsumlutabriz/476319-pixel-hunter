@@ -1,6 +1,6 @@
 import getElemFromTemplate from "../elem";
 import show from "../show";
-import elemGreeting from "./elem-greeting";
+import elemGreeting from "./greeting";
 
 const html = `<div id="intro" class="intro">
   <h1 class="intro__asterisk">*</h1>
