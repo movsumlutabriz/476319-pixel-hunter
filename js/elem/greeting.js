@@ -1,6 +1,6 @@
 import show from "../show";
 import getElemFromTemplate from "../elem";
-import screenRules from "./rules";
+import elemRules from "./rules";
 
 const html = `<div class="greeting central--blur">
   <div class="greeting__logo"><img src="img/logo_big.png" width="201" height="89" alt="Pixel Hunter"></div>
@@ -18,6 +18,6 @@ const html = `<div class="greeting central--blur">
 
 const elem = getElemFromTemplate(html);
 
-elem.querySelector(`.greeting__continue`).addEventListener(`click`, () => show(screenRules));
+elem.querySelector(`.greeting__continue`).addEventListener(`click`, () => show(elemRules));
 
 export default elem;

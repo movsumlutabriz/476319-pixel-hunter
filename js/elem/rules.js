@@ -1,17 +1,10 @@
 import getElemFromTemplate from "../elem";
 import reload from "../reload";
-import show from "../show";
-import screenGame1 from "./game-1";
+import getHtmlHeader from "../html/header";
+import showNextQuestion from "../next-question";
 
 const html = `<div>
-  <header class="header">
-    <div class="header__back">
-      <button class="back">
-        <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
-        <img src="img/logo_small.svg" width="101" height="44">
-      </button>
-    </div>
-  </header>
+  ${getHtmlHeader(3)}
   <div class="rules">
     <h1 class="rules__title">Правила</h1>
     <p class="rules__description">Угадай 10 раз для каждого изображения фото <img
@@ -41,7 +34,7 @@ elem.querySelector(`.rules__input`).addEventListener(`input`, (e) => {
 
 elem.querySelector(`.rules__form`).addEventListener(`submit`, (e) => {
   e.preventDefault();
-  show(screenGame1);
+  showNextQuestion();
 });
 
 export default elem;
