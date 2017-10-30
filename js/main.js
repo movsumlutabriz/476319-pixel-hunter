@@ -1,4 +1,3 @@
-import show from "./show";
-import elemIntro from "./elem/intro";
+import {showNextScreen} from './util';
 
-show(elemIntro);
+showNextScreen();
