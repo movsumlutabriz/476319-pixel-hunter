@@ -1,30 +1,29 @@
 import AbstractView from '../abstract-view';
-import showHeader from '../header/header';
-import showGameStats from './game-stats';
-import showTimer from '../timer/timer';
+import HeaderView from './header-view';
+import GameStatsView from './game-stats-view';
 
 export default class AbstractGameView extends AbstractView {
   constructor(question) {
     super();
     this.question = question;
+    this.headerView = new HeaderView();
+    this.gameStatsView = new GameStatsView();
   }
 
   render() {
     const el = super.render();
 
-    const headerView = showHeader();
-    headerView.refreshLives();
-    el.querySelector(`.header`).appendChild(headerView.element);
+    el.querySelector(`.header`).appendChild(this.headerView.element);
 
-    const timerView = showTimer();
-    this.timer = timerView.timer;
-    headerView.element.querySelector(`.game__timer`).appendChild(timerView.element);
-
-    const statsView = showGameStats();
-    statsView.refresh();
-    el.querySelector(`.stats`).appendChild(statsView.element);
+    el.querySelector(`.stats`).appendChild(this.gameStatsView.element);
 
     return el;
+  }
+
+  bind() {}
+
+  setTime(time) {
+    this.headerView.timeElement.innerHTML = time;
   }
 
   onAnswer() {}

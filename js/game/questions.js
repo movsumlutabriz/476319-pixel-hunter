@@ -1,4 +1,21 @@
-let currentQuestionIndex = null;
+export const AnswersTime = {
+  START: 0,
+  FAST: 10,
+  SLOW: 20
+};
+
+export const initialGame = {
+  questionNumber: 0,
+  lives: 3,
+  questionTime: AnswersTime.START
+};
+
+
+export const state = {
+  questionNumber: initialGame[`questionNumber`],
+  lives: initialGame[`lives`],
+  questionTime: initialGame[`questionTime`]
+};
 
 export const QuestionsTypes = {
   TWO_PHOTO: 1,
@@ -178,7 +195,7 @@ export const questions = [
 ];
 
 export const getLives = () => {
-  let lives = 3;
+  let lives = state.lives;
   questions.forEach((question) => {
     if (lives <= 0) {
       return;
@@ -205,7 +222,7 @@ export const getLives = () => {
 };
 
 export const reset = () => {
-  currentQuestionIndex = null;
+  state.questionNumber = null;
   questions.forEach((question) => {
     switch (question.type) {
       case QuestionsTypes.TWO_PHOTO:
@@ -229,12 +246,6 @@ export const getAnswersScoring = () => {
     }
   });
   return score;
-};
-
-export const AnswersTime = {
-  START: 20,
-  FAST: 10,
-  SLOW: 20
 };
 
 const isRightAnswer = (question) => {
@@ -289,18 +300,15 @@ export const isFastAnswer = (question) => question.answerTime <= AnswersTime.FAS
 
 export const isSlowAnswer = (question) => question.answerTime >= AnswersTime.SLOW;
 
-export const getNextQuestion = () => {
-  if (currentQuestionIndex === null) {
-    currentQuestionIndex = 0;
+export const setNextQuestion = () => {
+  state.questionTime = AnswersTime.START;
+  if (state.questionNumber === null) {
+    state.questionNumber = 0;
   } else {
-    currentQuestionIndex++;
+    state.questionNumber++;
   }
-  return questions[currentQuestionIndex];
 };
 
 export const getCurrentQuestion = () => {
-  if (currentQuestionIndex === null) {
-    currentQuestionIndex = 0;
-  }
-  return questions[currentQuestionIndex];
+  return questions[state.questionNumber];
 };

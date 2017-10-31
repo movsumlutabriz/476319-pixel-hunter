@@ -1,8 +1,8 @@
 import AbstractView from '../abstract-view';
-import {isFastAnswer, isSlowAnswer} from './questions';
+import {questions, isFastAnswer, isSlowAnswer} from './questions';
 
-export default class Game1View extends AbstractView {
-  constructor(questions) {
+export default class GameStatsView extends AbstractView {
+  constructor() {
     super();
     this.questions = questions;
   }
@@ -62,10 +62,6 @@ export default class Game1View extends AbstractView {
     html += `</ul>`;
 
     return html;
-  }
-
-  refresh() {
-    this.element.innerHTML = this.template;
   }
 
   bind() {}

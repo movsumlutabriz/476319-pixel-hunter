@@ -37,8 +37,7 @@ export default class Game3View extends AbstractGameView {
     this.element.addEventListener(`mouseup`, (e) => {
       if (e.target.classList.contains(`game__option`)) {
         this.onAnswer({
-          answer: e.target.dataset.type,
-          answerTime: this.timer.passedTime
+          answer: e.target.dataset.type
         });
       }
     });

@@ -1,9 +1,9 @@
 import BackView from './back-view';
-import {reload} from '../util';
+import Application from '../application';
 
 const view = new BackView();
 view.onBack = () => {
-  reload();
+  Application.showWelcome();
 };
 
 export default () => view;

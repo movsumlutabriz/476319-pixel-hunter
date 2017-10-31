@@ -40,8 +40,7 @@ export default class Game2View extends AbstractGameView {
     this.element.addEventListener(`change`, () => {
       const form = this.element.querySelector(`form.game__content`);
       this.onAnswer({
-        answer: form.question1.value,
-        answerTime: this.timer.passedTime
+        answer: form.question1.value
       });
     });
   }

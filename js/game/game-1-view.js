@@ -54,8 +54,7 @@ export default class Game1View extends AbstractGameView {
         this.question.images[1].answer = form.question2.value;
         this.onAnswer({
           answer1: form.question1.value,
-          answer2: form.question2.value,
-          answerTime: this.timer.passedTime
+          answer2: form.question2.value
         });
       }
     });
