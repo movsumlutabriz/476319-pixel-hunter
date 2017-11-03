@@ -1,19 +1,19 @@
 import showScreen from '../../methods/show-screen';
 import App from '../../application';
 import View from './game-view';
-import {randomQuestion as getQuestion, QuestionType, AnswerType} from '../../methods/get-question';
+import getQuestion from '../../methods/get-question';
 import getAnswer from '../../methods/get-answer';
 import checkImageSizes from '../../methods/check-image-sizes';
 import Timer from '../../methods/get-timer';
 
 class GameScreen {
+
   init() {
     this.lives = 3;
     this.answers = [];
     this.questions = 10;
     this.timer = new Timer(30);
     clearInterval(this._currTimer);
-    this._questionList = App.questionList.slice();
     this.next();
   }
 
@@ -36,49 +36,42 @@ class GameScreen {
         this.next();
       }
       timeContainer.innerText = this.timer.tick();
-      if (this.timer.time === 5) {
-        timeContainer.classList.add(`is-animated`);
-      }
     }, 1000);
   }
 
   next() {
     if (this.questions > 0 && this.lives >= 0) {
-      const currQuestion = getQuestion(this._questionList);
+      const currQuestion = getQuestion();
       const screen = new View(currQuestion, {lives: this.lives, answers: this.answers, timer: this.timer.time});
       this.timeControl(screen);
 
       showScreen(screen);
-      checkImageSizes(screen.element);
+      checkImageSizes();
 
       screen.goBack = () => {
-        /*eslint-disable */
-        if (confirm(`Вся игра будет потеряна. Уверены?`)) {
-          App.showGreeting();
-        }
-        /*eslint-enable */
+        App.showGreeting();
       };
 
       screen.onAnswerClick = (element, evt) => {
+
         const answerContainer = element.querySelector(`.game__content`);
         switch (currQuestion.type) {
-          case QuestionType.GAME1:
+          case `game-1`:
             const answerItems = answerContainer.querySelectorAll(`.game__answer :checked`);
             if (answerItems.length === 2) {
-              this.addAnswer(AnswerType[answerItems[0].value] === currQuestion.answers[0].type && AnswerType[answerItems[1].value] === currQuestion.answers[1].type);
+              this.addAnswer(currQuestion.answers[answerItems[0].name][answerItems[0].value] && currQuestion.answers[answerItems[1].name][answerItems[1].value]);
               this.next();
             }
             break;
-          case QuestionType.GAME2:
+          case `game-2`:
             if (evt.target.name === `question1`) {
-              this.addAnswer(currQuestion.answers[0].type === AnswerType[evt.target.value]);
+              this.addAnswer(currQuestion.answers[evt.target.name][evt.target.value]);
               this.next();
             }
             break;
-          case QuestionType.GAME3:
-            const findTarget = answerContainer.dataset.target;
+          case `game-3`:
             if (evt.target.classList.contains(`game__option`)) {
-              this.addAnswer(currQuestion.answers[evt.target.dataset.option].type === findTarget);
+              this.addAnswer(currQuestion.answers[evt.target.dataset.option]);
               this.next();
             }
             break;

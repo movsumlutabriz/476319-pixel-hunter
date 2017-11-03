@@ -13,24 +13,18 @@ export default class StatsView extends AbstractView {
     this.lives = typeof game.lives === `number` ? game.lives : -1;
   }
 
-
   get template() {
-    return `${getHeader()}<div class="result">Загрузка результатов...</div>${getFooter()}`;
-  }
+    let content = `${getHeader()}
+<div class="result">`;
 
-
-  showResults(resultsData) {
-    const lastResult = resultsData[resultsData.length - 1];
-    const isWin = lastResult.answers.length === 10 && lastResult.lives >= 0;
-    const content = resultsData.reverse().reduce((result, current, i) => {
-      if (current.answers.length === 10 && current.lives >= 0) {
-        const score = getScore(current.answers, current.lives);
-        return result + `
+    if (this.answers.length === 10 && this.lives >= 0) {
+      const score = getScore(this.answers, this.lives);
+      content += `<h1>${data.title.win}</h1>
 <table class="result__table">
       <tr>
-        <td class="result__number">${i + 1}</td>
+        <td class="result__number">1.</td>
         <td colspan="2">
-          ${stats(current.answers)}
+          ${stats(this.answers)}
         </td>
         <td class="result__points">×&nbsp;100</td>
         <td class="result__total">${score.normal}</td>
@@ -45,7 +39,7 @@ export default class StatsView extends AbstractView {
       <tr>
         <td></td>
         <td class="result__extra">${data.bonus.lives}:</td>
-        <td class="result__extra">${current.lives}&nbsp;<span class="stats__result stats__result--alive"></span></td>
+        <td class="result__extra">${this.lives}&nbsp;<span class="stats__result stats__result--alive"></span></td>
         <td class="result__points">×&nbsp;50</td>
         <td class="result__total">${score.livesBonus}</td>
       </tr>
@@ -59,41 +53,34 @@ export default class StatsView extends AbstractView {
       <tr>
         <td colspan="5" class="result__total  result__total--final">${score.total}</td>
       </tr>
-      </table>
+    </table>
 `;
-      } else {
-        return result + `
+    } else {
+      content += `<h1>${data.title.lost}</h1>
 <table class="result__table">
       <tr>
-        <td class="result__number">${i + 1}</td>
+        <td class="result__number">1.</td>
         <td>
-          ${stats(current.answers)}
+          ${stats(this.answers)}
         </td>
         <td class="result__total"></td>
         <td class="result__total  result__total--final">fail</td>
       </tr>
-      </table>
+    </table>
 `;
-      }
-    }, ``);
+    }
 
-    this.resultElement.innerHTML = `<h1>${isWin ? data.title.win : data.title.lost}</h1>
-<table class="result__table">${content}</table>`;
-  }
-
-  showErrorScreen() {
-    this.resultElement.innerHTML = `<h1>Не удалось загрузить данные статистики :(</h1>`;
+    content += `</div>
+      ${getFooter()}`;
+    return content;
   }
 
   bind() {
-    this.resultElement = this.element.querySelector(`.result`);
-
     this.element.querySelector(`.back`).onclick = (evt) => {
       evt.preventDefault();
       this.goBack();
     };
   }
-
 
   goBack() {
   }

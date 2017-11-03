@@ -3,8 +3,6 @@ import greetingScreen from './screens/greeting/greeting';
 import rulesScreen from './screens/rules/rules';
 import gameScreen from './screens/game/game';
 import statsScreen from './screens/stats/stats';
-import {loaderQuestions} from './methods/get-question';
-import {saveResults} from './loader';
 
 const ControllerId = {
   INTRO: ``,
@@ -12,6 +10,10 @@ const ControllerId = {
   RULES: `rules`,
   GAME: `game`,
   STATS: `stats`
+};
+
+const saveState = (state) => {
+  return JSON.stringify(state);
 };
 
 const loadState = (dataString) => {
@@ -31,29 +33,16 @@ const routes = {
 };
 
 export default class Application {
+
+
   static init() {
-    introScreen.init();
     const onHashChange = () => {
       const hashValue = location.hash.replace(`#`, ``);
       const [id, data] = hashValue.split(`?`);
       this.changeHash(id, data);
     };
     window.addEventListener(`hashchange`, onHashChange);
-
-    loaderQuestions.then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else if (response.status === 404) {
-        return [];
-      }
-      throw new Error(`Неизвестный статус: ${response.status} ${response.statusText}`);
-    }).then((responseData) => {
-      this.questionList = responseData;
-      onHashChange();
-      if (location.hash.replace(`#`, ``) === ``) {
-        this.showGreeting();
-      }
-    });
+    onHashChange();
   }
 
   static changeHash(id, data) {
@@ -81,9 +70,7 @@ export default class Application {
   }
 
   static showStats(state) {
-    saveResults(state, this.userName).then(() => {
-      location.hash = ControllerId.STATS;
-    });
+    location.hash = `${ControllerId.STATS}?${saveState(state)}`;
   }
 
 }
