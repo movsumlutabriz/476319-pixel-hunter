@@ -1,20 +1,18 @@
-import showScreen from '../../methods/show-screen';
-import App from '../../application';
 import View from './game-view';
 import getQuestion from '../../methods/get-question';
+import screenBack from '../greeting/greeting';
 import getAnswer from '../../methods/get-answer';
+import showScreen from '../../methods/show-screen';
 import checkImageSizes from '../../methods/check-image-sizes';
+import screenStats from '../stats/stats';
 import Timer from '../../methods/get-timer';
 
-class GameScreen {
-
-  init() {
+export default class InstantGame {
+  constructor() {
     this.lives = 3;
     this.answers = [];
     this.questions = 10;
     this.timer = new Timer(30);
-    clearInterval(this._currTimer);
-    this.next();
   }
 
   addAnswer(answerValue) {
@@ -49,7 +47,7 @@ class GameScreen {
       checkImageSizes();
 
       screen.goBack = () => {
-        App.showGreeting();
+        showScreen(screenBack());
       };
 
       screen.onAnswerClick = (element, evt) => {
@@ -78,9 +76,7 @@ class GameScreen {
         }
       };
     } else {
-      App.showStats(this);
+      showScreen(screenStats(this));
     }
   }
 }
-
-export default new GameScreen();

@@ -3,87 +3,28 @@ import greetingScreen from './screens/greeting/greeting';
 import rulesScreen from './screens/rules/rules';
 import gameScreen from './screens/game/game';
 import statsScreen from './screens/stats/stats';
-import {loaderQuestions} from './methods/get-question';
-import {saveResults} from './loader';
 
-const ControllerId = {
-  INTRO: ``,
-  GREETING: `greeting`,
-  RULES: `rules`,
-  GAME: `game`,
-  STATS: `stats`
-};
-
-const loadState = (dataString) => {
-  try {
-    return JSON.parse(dataString);
-  } catch (e) {
-    return ``;
-  }
-};
-
-const routes = {
-  [ControllerId.INTRO]: introScreen,
-  [ControllerId.GREETING]: greetingScreen,
-  [ControllerId.RULES]: rulesScreen,
-  [ControllerId.GAME]: gameScreen,
-  [ControllerId.STATS]: statsScreen
-};
 
 export default class Application {
-  static init() {
-    introScreen.init();
-    const onHashChange = () => {
-      const hashValue = location.hash.replace(`#`, ``);
-      const [id, data] = hashValue.split(`?`);
-      this.changeHash(id, data);
-    };
-    window.addEventListener(`hashchange`, onHashChange);
-
-    loaderQuestions.then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else if (response.status === 404) {
-        return [];
-      }
-      throw new Error(`Неизвестный статус: ${response.status} ${response.statusText}`);
-    }).then((responseData) => {
-      this.questionList = responseData;
-      onHashChange();
-      if (location.hash.replace(`#`, ``) === ``) {
-        this.showGreeting();
-      }
-    });
-  }
-
-  static changeHash(id, data) {
-    const controller = routes[id];
-
-    if (controller) {
-      controller.init(loadState(data));
-    }
-  }
 
   static showIntro() {
-    location.hash = ControllerId.INTRO;
+    introScreen.init();
   }
 
   static showGreeting() {
-    location.hash = ControllerId.GREETING;
+    greetingScreen.init();
   }
 
   static showRules() {
-    location.hash = ControllerId.RULES;
+    rulesScreen.init();
   }
 
   static showGame() {
-    location.hash = ControllerId.GAME;
+    gameScreen.init();
   }
 
   static showStats(state) {
-    saveResults(state, this.userName).then(() => {
-      location.hash = ControllerId.STATS;
-    });
+    statsScreen.init(state);
   }
 
 }
