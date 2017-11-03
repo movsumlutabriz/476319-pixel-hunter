@@ -1,54 +1,89 @@
-import welcomeScreen from './welcome/welcome-screen';
-import gameScreen from './game/game-screen';
-import statsScreen from './stats/stats-screen';
-import {initialGame} from './game/questions';
-
-const loadState = (stateStr) => {
-  try {
-    return JSON.parse(stateStr);
-  } catch (e) {
-    return initialGame;
-  }
-};
+import introScreen from './screens/intro/intro';
+import greetingScreen from './screens/greeting/greeting';
+import rulesScreen from './screens/rules/rules';
+import gameScreen from './screens/game/game';
+import statsScreen from './screens/stats/stats';
+import {loaderQuestions} from './methods/get-question';
+import {saveResults} from './loader';
 
 const ControllerId = {
-  WELCOME: ``,
+  INTRO: ``,
+  GREETING: `greeting`,
+  RULES: `rules`,
   GAME: `game`,
   STATS: `stats`
 };
 
+const loadState = (dataString) => {
+  try {
+    return JSON.parse(dataString);
+  } catch (e) {
+    return ``;
+  }
+};
+
+const routes = {
+  [ControllerId.INTRO]: introScreen,
+  [ControllerId.GREETING]: greetingScreen,
+  [ControllerId.RULES]: rulesScreen,
+  [ControllerId.GAME]: gameScreen,
+  [ControllerId.STATS]: statsScreen
+};
+
 export default class Application {
   static init() {
-    Application.routes = {
-      [ControllerId.WELCOME]: welcomeScreen,
-      [ControllerId.GAME]: gameScreen,
-      [ControllerId.STATS]: statsScreen
+    introScreen.init();
+    const onHashChange = () => {
+      const hashValue = location.hash.replace(`#`, ``);
+      const [id, data] = hashValue.split(`?`);
+      this.changeHash(id, data);
     };
+    window.addEventListener(`hashchange`, onHashChange);
 
-    window.onhashchange = () => {
-      Application.onHashChange();
-    };
-    Application.onHashChange();
+    loaderQuestions.then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else if (response.status === 404) {
+        return [];
+      }
+      throw new Error(`Неизвестный статус: ${response.status} ${response.statusText}`);
+    }).then((responseData) => {
+      this.questionList = responseData;
+      onHashChange();
+      if (location.hash.replace(`#`, ``) === ``) {
+        this.showGreeting();
+      }
+    });
   }
 
-  static onHashChange() {
-    const hashValue = location.hash.replace(`#`, ``);
-    const [id, stateStr] = hashValue.split(`?`);
-    const controller = Application.routes[id];
+  static changeHash(id, data) {
+    const controller = routes[id];
+
     if (controller) {
-      controller.init(loadState(stateStr));
+      controller.init(loadState(data));
     }
   }
 
-  static showWelcome() {
-    welcomeScreen.init();
+  static showIntro() {
+    location.hash = ControllerId.INTRO;
+  }
+
+  static showGreeting() {
+    location.hash = ControllerId.GREETING;
+  }
+
+  static showRules() {
+    location.hash = ControllerId.RULES;
   }
 
   static showGame() {
-    gameScreen.init(initialGame);
+    location.hash = ControllerId.GAME;
   }
 
-  static showStats() {
-    statsScreen.init();
+  static showStats(state) {
+    saveResults(state, this.userName).then(() => {
+      location.hash = ControllerId.STATS;
+    });
   }
+
 }
