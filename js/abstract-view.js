@@ -1,23 +1,22 @@
+import createElement from './methods/create-element';
+
 export default class AbstractView {
+
   get template() {
-    throw new Error(`Геттер template должен быть переопределен`);
+    throw new Error(`You have to define template for view`);
   }
 
   render() {
-    const el = document.createElement(`div`);
-    el.innerHTML = this.template;
-    return el;
+    return createElement(this.template.trim());
   }
 
-  bind() {
-    throw new Error(`Метод bind должен быть переопределен`);
-  }
+  bind() {}
 
   get element() {
-    if (!this._el) {
-      this._el = this.render();
+    if (!this._element) {
+      this._element = this.render();
       this.bind();
     }
-    return this._el;
+    return this._element;
   }
 }

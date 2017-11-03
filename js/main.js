@@ -1,3 +1,3 @@
-import {showNextScreen} from './util';
+import App from './application';
 
-showNextScreen();
+App.showIntro();
