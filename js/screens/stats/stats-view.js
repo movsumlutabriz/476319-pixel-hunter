@@ -7,14 +7,16 @@ import stats from '../stats-line';
 
 
 export default class StatsView extends AbstractView {
-  constructor(game) {
+  constructor(game = {}) {
     super();
-    this.game = game;
+    this.answers = typeof game.answers === `object` ? game.answers : [];
+    this.lives = typeof game.lives === `number` ? game.lives : -1;
   }
 
   get template() {
     let content = `${getHeader()}
 <div class="result">`;
+
 
     if (this.game.questions === 0 && this.game.lives >= 0) {
       const score = getScore(this.game.answers, this.game.lives);
