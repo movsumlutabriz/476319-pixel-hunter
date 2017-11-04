@@ -5,7 +5,6 @@ import gameScreen from './screens/game/game';
 import statsScreen from './screens/stats/stats';
 import {loaderQuestions} from './methods/get-question';
 
-
 const ControllerId = {
   INTRO: ``,
   GREETING: `greeting`,
