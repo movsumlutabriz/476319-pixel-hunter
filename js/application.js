@@ -4,6 +4,7 @@ import rulesScreen from './screens/rules/rules';
 import gameScreen from './screens/game/game';
 import statsScreen from './screens/stats/stats';
 import {loaderQuestions} from './methods/get-question';
+import {saveResults} from './loader';
 
 const ControllerId = {
   INTRO: ``,
@@ -11,10 +12,6 @@ const ControllerId = {
   RULES: `rules`,
   GAME: `game`,
   STATS: `stats`
-};
-
-const saveState = (state) => {
-  return JSON.stringify(state);
 };
 
 const loadState = (dataString) => {
@@ -53,6 +50,9 @@ export default class Application {
     }).then((responseData) => {
       this.questionList = responseData;
       onHashChange();
+      if (location.hash.replace(`#`, ``) === ``) {
+        this.showGreeting();
+      }
     });
   }
 
@@ -81,7 +81,9 @@ export default class Application {
   }
 
   static showStats(state) {
-    location.hash = `${ControllerId.STATS}?${saveState(state)}`;
+    saveResults(state, this.userName).then(() => {
+      location.hash = ControllerId.STATS;
+    });
   }
 
 }
