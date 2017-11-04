@@ -17,15 +17,14 @@ export default class StatsView extends AbstractView {
     let content = `${getHeader()}
 <div class="result">`;
 
-
-    if (this.game.questions === 0 && this.game.lives >= 0) {
-      const score = getScore(this.game.answers, this.game.lives);
+    if (this.answers.length === 10 && this.lives >= 0) {
+      const score = getScore(this.answers, this.lives);
       content += `<h1>${data.title.win}</h1>
 <table class="result__table">
       <tr>
         <td class="result__number">1.</td>
         <td colspan="2">
-          ${stats(this.game.answers)}
+          ${stats(this.answers)}
         </td>
         <td class="result__points">×&nbsp;100</td>
         <td class="result__total">${score.normal}</td>
@@ -40,7 +39,7 @@ export default class StatsView extends AbstractView {
       <tr>
         <td></td>
         <td class="result__extra">${data.bonus.lives}:</td>
-        <td class="result__extra">${this.game.lives}&nbsp;<span class="stats__result stats__result--alive"></span></td>
+        <td class="result__extra">${this.lives}&nbsp;<span class="stats__result stats__result--alive"></span></td>
         <td class="result__points">×&nbsp;50</td>
         <td class="result__total">${score.livesBonus}</td>
       </tr>
@@ -62,7 +61,7 @@ export default class StatsView extends AbstractView {
       <tr>
         <td class="result__number">1.</td>
         <td>
-          ${stats(this.game.answers)}
+          ${stats(this.answers)}
         </td>
         <td class="result__total"></td>
         <td class="result__total  result__total--final">fail</td>
