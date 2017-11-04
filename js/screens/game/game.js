@@ -1,15 +1,12 @@
 import showScreen from '../../methods/show-screen';
 import App from '../../application';
 import View from './game-view';
-
 import {randomQuestion as getQuestion, QuestionType, AnswerType} from '../../methods/get-question';
-
 import getAnswer from '../../methods/get-answer';
 import checkImageSizes from '../../methods/check-image-sizes';
 import Timer from '../../methods/get-timer';
 
 class GameScreen {
-
   init() {
     this.lives = 3;
     this.answers = [];
@@ -42,9 +39,8 @@ class GameScreen {
   }
 
   next() {
-    if (this.questions > 0 && this
+    if (this.questions > 0 && this.lives >= 0) {
       const currQuestion = getQuestion(App.questionList);
-
       const screen = new View(currQuestion, {lives: this.lives, answers: this.answers, timer: this.timer.time});
       this.timeControl(screen);
 
@@ -56,7 +52,6 @@ class GameScreen {
       };
 
       screen.onAnswerClick = (element, evt) => {
-
         const answerContainer = element.querySelector(`.game__content`);
         switch (currQuestion.type) {
           case QuestionType.GAME1:
@@ -75,7 +70,6 @@ class GameScreen {
           case QuestionType.GAME3:
             if (evt.target.classList.contains(`game__option`)) {
               this.addAnswer(currQuestion.answers[evt.target.dataset.option].type === AnswerType.painting);
-
               this.next();
             }
             break;
