@@ -47,7 +47,7 @@ git clone git@github.com:htmlacademy-ecmascript/pixel-hunter.git
 cd pixel-hunter
 
 # Привяжите к ней репозиторий Академии
-git remote add academy git@github.com:htmlacademy-ecmascript/476319-pixel-hunter.git
+git remote add academy git@github.com:htmlacademy-ecmascript/28087-pixel-hunter.git
 ```
 
 ### 5. Настройте SSH-ключи

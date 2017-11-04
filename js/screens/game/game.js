@@ -13,6 +13,7 @@ class GameScreen {
     this.questions = 10;
     this.timer = new Timer(30);
     clearInterval(this._currTimer);
+    this._questionList = App.questionList.slice();
     this.next();
   }
 
@@ -35,12 +36,19 @@ class GameScreen {
         this.next();
       }
       timeContainer.innerText = this.timer.tick();
+      if (this.timer.time === 5) {
+        timeContainer.classList.add(`is-animated`);
+      }
     }, 1000);
   }
 
   next() {
     if (this.questions > 0 && this.lives >= 0) {
+<<<<<<< HEAD
       const currQuestion = getQuestion(App.questionList);
+=======
+      const currQuestion = getQuestion(this._questionList);
+>>>>>>> 4e64eb84c8c36cf9760eca200e26fc3b18c45ced
       const screen = new View(currQuestion, {lives: this.lives, answers: this.answers, timer: this.timer.time});
       this.timeControl(screen);
 
@@ -48,7 +56,10 @@ class GameScreen {
       checkImageSizes(screen.element);
 
       screen.goBack = () => {
-        App.showGreeting();
+        // eslint-disable-next-line
+        if (confirm(`Вся игра будет потеряна. Уверены?`)) {
+          App.showGreeting();
+        }
       };
 
       screen.onAnswerClick = (element, evt) => {
@@ -68,8 +79,14 @@ class GameScreen {
             }
             break;
           case QuestionType.GAME3:
+<<<<<<< HEAD
             if (evt.target.classList.contains(`game__option`)) {
               this.addAnswer(currQuestion.answers[evt.target.dataset.option].type === AnswerType.painting);
+=======
+            const findTarget = answerContainer.dataset.target;
+            if (evt.target.classList.contains(`game__option`)) {
+              this.addAnswer(currQuestion.answers[evt.target.dataset.option].type === findTarget);
+>>>>>>> 4e64eb84c8c36cf9760eca200e26fc3b18c45ced
               this.next();
             }
             break;
