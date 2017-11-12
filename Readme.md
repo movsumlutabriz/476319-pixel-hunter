@@ -3,12 +3,12 @@
 * Студент: [Tabriz  Movsumlu](https://htmlacademy.ru/profile/id476319).
 * Наставник: [Саша Ивашкин](https://htmlacademy.ru/profile/id7280).
 
----
+----
 
 _Не удаляйте и не изменяйте папки и файлы:_
 _`.editorconfig`, `.gitattributes`, `.gitignore`, `.travis.yml`, `package.json`._
 
----
+----
 
 ### Памятка
 
